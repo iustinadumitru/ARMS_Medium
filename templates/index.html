@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Medium topics{% endblock %}
+
+{% block content_title %}{% if search %}Search "{{ search }}"{% else %}Topics{% endif %}{% endblock %}
+
+{% block content %}
+{% if topic_info %}
+<h3>
+    Stories
+</h3>
+{% for x in topic_info['stories']%}
+    <h4>
+    <a href="{{ x }}">
+        story #{{loop.index}}
+    </a>
+    </h4>
+{% endfor %}
+
+<h3>
+    People
+</h3>
+{% for x, _ in topic_info['people']%}
+    <h4>
+    <a href="https://medium.com/{{ x }}">
+        {{ x }}
+    </a>
+    </h4>
+{% endfor %}
+
+<h3>
+    Publications
+</h3>
+{% for x in topic_info['publications']%}
+    <h4>
+    <a href="{{ x }}">
+        publication #{{loop.index}}
+    </a>
+    </h4>
+{% endfor %}
+
+<h3>
+    Tags
+</h3>
+{% for x in topic_info['tags']%}
+    <h4>
+    <a href="https://medium.com/tag/{{ x }}">
+        #{{ x }}
+    </a>
+    </h4>
+{% endfor %}
+
+{% endif %}
+
+{% if topics %}
+{% for topic in topics %}
+<h4>
+    <a href="{{ url_for('showTopic', topic=topic) }}">
+        {{ topic }}
+    </a>
+</h4>
+
+{% else %}
+<p>No entries have been created yet.</p>
+{%endfor%}
+{%endif%}
+
+{% endblock %}
